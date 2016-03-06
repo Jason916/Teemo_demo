@@ -1,8 +1,9 @@
 package com.example.jasonxu.mobiletester.activity;
 
 
-import android.widget.Button;
+import android.content.Intent;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
 import com.example.jasonxu.mobiletester.BuildConfig;
 import com.example.jasonxu.mobiletester.R;
@@ -13,7 +14,10 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 /**
@@ -25,14 +29,24 @@ import static junit.framework.Assert.assertTrue;
 public class SettingsActivityTest {
 
     private SettingsActivity settingsActivity;
-    private Button toastBtn;
+    private LinearLayout about;
+    private LinearLayout mailSettings;
+    private LinearLayout layGoBack;
+
     @Before
     public void setUp() {
         settingsActivity = Robolectric.setupActivity(SettingsActivity.class);
-//        toastBtn = (Button) settingsActivity.findViewById(R.id.btn_toast);
-
+        layGoBack = (LinearLayout) settingsActivity.findViewById(R.id.lay_go_back);
+        mailSettings = (LinearLayout) settingsActivity.findViewById(R.id.mail_settings);
+        about = (LinearLayout) settingsActivity.findViewById(R.id.about);
     }
 
+    @Test
+    public void testActivity() {
+        SettingsActivity settingsActivity = Robolectric.setupActivity(SettingsActivity.class);
+        assertNotNull(settingsActivity);
+        assertEquals(settingsActivity.getTitle(), "MobileTester");
+    }
 
     /**
      * Test CheckBox
@@ -59,6 +73,25 @@ public class SettingsActivityTest {
         assertTrue(chkRoot.isChecked());
         chkRoot.setChecked(false);
         assertTrue(!chkRoot.isChecked());
-
     }
+
+    /**
+     * Test Click to NextActivity
+     */
+    @Test
+    public void testStartActivity() {
+        layGoBack.performClick();
+        Intent expectedIntent = new Intent(settingsActivity, MainPageActivity.class);
+        Intent actualIntent = ShadowApplication.getInstance().getNextStartedActivity();
+        assertEquals(expectedIntent, actualIntent);
+        mailSettings.performClick();
+        Intent mailSettingExpectedIntent = new Intent(settingsActivity, MailSettingsActivity.class);
+        Intent mailSettingActualIntent = ShadowApplication.getInstance().getNextStartedActivity();
+        assertEquals(mailSettingExpectedIntent, mailSettingActualIntent);
+        about.performClick();
+        Intent aboutExpectedIntent = new Intent(settingsActivity, AboutActivity.class);
+        Intent aboutActualIntent = ShadowApplication.getInstance().getNextStartedActivity();
+        assertEquals(aboutExpectedIntent, aboutActualIntent);
+    }
+
 }

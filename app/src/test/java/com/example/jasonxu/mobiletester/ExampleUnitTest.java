@@ -14,7 +14,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void chengfa_isCorrect() throws Exception {
-        assertEquals(7, 4 * 2);
+    public void multiplicative_isCorrect() throws Exception {
+        assertEquals(8, 4 * 2);
     }
 }
