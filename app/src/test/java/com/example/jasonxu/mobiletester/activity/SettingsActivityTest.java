@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
@@ -24,7 +24,8 @@ import static junit.framework.Assert.assertTrue;
  * Created by jasonxu on 16/3/5.
  * Email: 573654699@qq.com
  **/
-@RunWith(RobolectricGradleTestRunner.class)
+//@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
 public class SettingsActivityTest {
 
@@ -79,19 +80,22 @@ public class SettingsActivityTest {
      * Test Click to NextActivity
      */
     @Test
-    public void testStartActivity() {
+    public void testNextActivity() {
         layGoBack.performClick();
         Intent expectedIntent = new Intent(settingsActivity, MainPageActivity.class);
         Intent actualIntent = ShadowApplication.getInstance().getNextStartedActivity();
-        assertEquals(expectedIntent, actualIntent);
+//        System.out.println(expectedIntent);
+//        System.out.println(actualIntent);
+        // activity intent
+        assertEquals(String.valueOf(expectedIntent),String.valueOf(actualIntent));
         mailSettings.performClick();
         Intent mailSettingExpectedIntent = new Intent(settingsActivity, MailSettingsActivity.class);
         Intent mailSettingActualIntent = ShadowApplication.getInstance().getNextStartedActivity();
-        assertEquals(mailSettingExpectedIntent, mailSettingActualIntent);
+        assertEquals(String.valueOf(mailSettingExpectedIntent), String.valueOf(mailSettingActualIntent));
         about.performClick();
         Intent aboutExpectedIntent = new Intent(settingsActivity, AboutActivity.class);
         Intent aboutActualIntent = ShadowApplication.getInstance().getNextStartedActivity();
-        assertEquals(aboutExpectedIntent, aboutActualIntent);
+        assertEquals(String.valueOf(aboutExpectedIntent), String.valueOf(aboutActualIntent));
     }
 
 }

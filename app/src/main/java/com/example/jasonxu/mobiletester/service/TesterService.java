@@ -1,21 +1,5 @@
 package com.example.jasonxu.mobiletester.service;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
-
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -58,6 +42,22 @@ import com.example.jasonxu.mobiletester.utils.MyApplication;
 import com.example.jasonxu.mobiletester.utils.ProcessInfo;
 import com.example.jasonxu.mobiletester.utils.Programe;
 import com.example.jasonxu.mobiletester.utils.Settings;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Service running in background
@@ -182,7 +182,7 @@ public class TesterService extends Service {
         processName = intent.getExtras().getString("processName");
         packageName = intent.getExtras().getString("packageName");
         startActivity = intent.getExtras().getString("startActivity");
-
+        // get uid
         try {
             PackageManager pm = getPackageManager();
             ApplicationInfo ainfo = pm.getApplicationInfo(packageName, PackageManager.GET_ACTIVITIES);

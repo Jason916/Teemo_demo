@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion "25"
 
     defaultConfig {
         applicationId "com.example.jasonxu.mobiletester"
@@ -30,10 +30,13 @@ dependencies {
     compile files('libs/additionnal.jar')
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.9.5'
-    testCompile 'org.robolectric:robolectric:3.0'
-    testCompile 'org.robolectric:robolectric-annotations:3.0'
+    testCompile 'org.robolectric:robolectric:3.2.2'
+    testCompile 'org.robolectric:robolectric-annotations:3.2.2'
     //robolectric针对support-v4的shadows
     testCompile 'org.robolectric:shadows-support-v4:3.0'
     compile files('libs/mail.jar')
     compile files('libs/commons-email-1.2.jar')
+    compile files('libs/android-all-5.0.0_r2-robolectric-1.jar')
+    compile files('libs/android-all-7.0.0_r1-robolectric-0.jar')
+    compile files('libs/android-all-7.1.0_r7-robolectric-0.jar')
 }
